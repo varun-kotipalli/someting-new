@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Schema Compass — sidebar panel (3a / 3b)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Tokens — lift these into your CSS vars / Tailwind config */
+  :root{
+    --bg:#f4f3ee; --panel:#fbfaf6; --card:#fff;
+    --ink:#1c1b18; --ink-2:#6f6c63; --ink-3:#8d8a7f;
+    --line:#cfccc0; --line-2:#e2dfd3; --row-alt:#eceae1;
+    --accent:#c2e043; --accent-ink:#9bbd1b; --accent-wash:#edf5c7;
+    --pk:#a16207; --fk:#8a1e5e;
+    --sans:"Instrument Sans",system-ui,sans-serif; --mono:"Fira Code",ui-monospace,monospace;
+  }
+  body{margin:0;background:#e9e7df;font-family:var(--sans);color:var(--ink);padding:32px;display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start}
+  .dv-card{background:var(--card);border:1px solid rgba(0,0,0,.12);overflow:hidden}
+</style>
+</head>
+<body>
+<!--
+  Two static states of the same component, both inline-styled so you can read every value.
+  Behaviour to wire in React:
+    • Rail button / ⌘K  → open panel, focus <input>
+    • input empty       → render tree (state A); input non-empty → render grouped results (state B)
+    • × or ⌫ to empty   → back to tree, preserving expanded groups
+    • Esc / canvas click→ close panel
+    • Row anatomy is identical in both states: [mark ■/□] [name] [degree bar] [count]
+-->
+<!-- STATE A: panel open, search empty → browse tree -->
+<div id="state-browse">
+<div class="dv-card" style="width:640px;height:600px;display:grid;grid-template-rows:40px 1fr;background:#f4f3ee;color:#1c1b18;font-size:12px">
+  <div style="display:flex;align-items:center;gap:14px;padding:0 14px;border-bottom:1px solid #cfccc0;background:#fbfaf6"><span style="font-weight:600;white-space:nowrap">Oracle SQL export</span><span style="font-family:'Fira Code',monospace;font-size:11px;color:#6f6c63;white-space:nowrap">clo · 575 tables</span><div style="display:flex;margin-left:auto;border:1px solid #cfccc0"><span style="padding:4px 12px;background:#1c1b18;color:#f4f3ee">Graph</span><span style="padding:4px 12px">Dictionary</span></div></div>
+  <div style="display:grid;grid-template-columns:44px 1fr;min-height:0">
+    <div style="border-right:1px solid #cfccc0;background:#fbfaf6;display:flex;flex-direction:column;align-items:center;padding-top:8px;gap:4px">
+      <div style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#1c1b18;color:#f4f3ee"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg></div>
+      <div style="width:24px;height:1px;background:#cfccc0;margin:6px 0"></div>
+      <div style="font-family:'Fira Code',monospace;font-size:8.5px;color:#6f6c63;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.06em">RECENT</div>
+      <div style="width:32px;height:22px;display:flex;align-items:center;justify-content:center;font-family:'Fira Code',monospace;font-size:9px;border:1px solid #1c1b18;background:#fff">APA</div>
+      <div style="width:32px;height:22px;display:flex;align-items:center;justify-content:center;font-family:'Fira Code',monospace;font-size:9px;border:1px solid #cfccc0;background:#fff">CUS</div>
+      <div style="width:32px;height:22px;display:flex;align-items:center;justify-content:center;font-family:'Fira Code',monospace;font-size:9px;border:1px solid #cfccc0;background:#fff">USR</div>
+      <div style="margin-top:auto;margin-bottom:10px;font-family:'Fira Code',monospace;font-size:9px;color:#8d8a7f;writing-mode:vertical-rl;transform:rotate(180deg)">⌘K</div>
+    </div>
+    <div style="position:relative;overflow:hidden;background-color:#f4f3ee;background-image:linear-gradient(#e2dfd3 1px,transparent 1px),linear-gradient(90deg,#e2dfd3 1px,transparent 1px);background-size:24px 24px">
+      <div style="position:absolute;left:420px;top:90px;width:150px;background:#fff;border:1px solid #1c1b18;border-left:3px solid #1c1b18;font-family:'Fira Code',monospace;font-size:10.5px;opacity:.55"><div style="display:flex;justify-content:space-between;padding:5px 8px;border-bottom:1px solid #1c1b18;font-weight:500">CUST<span style="color:#8d8a7f;font-weight:400">18</span></div><div style="display:flex;padding:3px 8px;gap:6px"><span style="color:#a16207;width:14px">PK</span><span>CUST_ID</span></div></div>
+      <div style="position:absolute;left:12px;top:12px;bottom:12px;width:350px;background:#fbfaf6;border:1px solid #1c1b18;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;gap:8px;padding:9px 12px;border-bottom:1px solid #1c1b18;font-family:'Fira Code',monospace;font-size:12.5px"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span style="color:#8d8a7f">table or column<span style="color:#9bbd1b">|</span></span><span style="margin-left:auto;font-size:10px;color:#8d8a7f;font-family:'Instrument Sans',sans-serif">esc</span></div>
+        <div style="display:flex;align-items:center;gap:10px;padding:6px 12px;border-bottom:1px solid #cfccc0;font-size:10.5px;color:#6f6c63;font-family:'Fira Code',monospace"><span>575 tables</span><span><span style="color:#1c1b18">■</span> 6 on canvas</span><div style="margin-left:auto;display:flex;border:1px solid #cfccc0;font-family:'Instrument Sans',sans-serif"><span style="padding:1px 7px;background:#1c1b18;color:#f4f3ee">Owner</span><span style="padding:1px 7px">Prefix</span><span style="padding:1px 7px">A–Z</span></div></div>
+        <div style="font-family:'Fira Code',monospace;font-size:11px;line-height:1.95;padding:4px 0;overflow:hidden;flex:1">
+          <div style="display:flex;padding:0 12px;gap:8px;background:#eceae1"><span>▾ CLO</span><span style="color:#6f6c63">410</span><span style="margin-left:auto;color:#1c1b18">■ 5</span></div>
+          <div style="display:flex;padding:0 12px 0 22px;gap:8px;color:#6f6c63"><span>▸ APP</span><span>56</span><span style="color:#8d8a7f;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0">APP, APPTMT_DETL, APP_ADAC_REAS…</span></div>
+          <div style="display:flex;padding:0 12px 0 22px;gap:8px"><span>▾ CUST</span><span style="color:#6f6c63">16</span><span style="margin-left:auto;color:#1c1b18">■ 4</span></div>
+          <div style="display:flex;align-items:center;padding:0 12px 0 36px;gap:8px"><span style="width:8px">■</span><span style="flex:1">CUST</span><span style="width:40px;height:5px;background:#e2dfd3;position:relative"><span style="position:absolute;left:0;top:0;bottom:0;width:38px;background:#1c1b18"></span></span><span style="width:22px;text-align:right;color:#6f6c63">61</span></div>
+          <div style="display:flex;align-items:center;padding:0 12px 0 36px;gap:8px"><span style="width:8px;color:#8d8a7f">□</span><span style="flex:1">CUST_ADR</span><span style="width:40px;height:5px;background:#e2dfd3;position:relative"><span style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#1c1b18"></span></span><span style="width:22px;text-align:right;color:#6f6c63">3</span></div>
+          <div style="display:flex;align-items:center;padding:0 12px 0 36px;gap:8px;background:#1c1b18;color:#f4f3ee"><span style="width:8px">■</span><span style="flex:1">CUST_APP_MTRX</span><span style="width:40px;height:5px;background:#44443f;position:relative"><span style="position:absolute;left:0;top:0;bottom:0;width:9px;background:#c2e043"></span></span><span style="width:22px;text-align:right">11</span></div>
+          <div style="display:flex;align-items:center;padding:0 12px 0 36px;gap:8px"><span style="width:8px;color:#8d8a7f">□</span><span style="flex:1">CUST_CNTCT</span><span style="width:40px;height:5px;background:#e2dfd3;position:relative"><span style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#1c1b18"></span></span><span style="width:22px;text-align:right;color:#6f6c63">2</span></div>
+          <div style="display:flex;align-items:center;padding:0 12px 0 36px;gap:8px"><span style="width:8px">■</span><span style="flex:1">CUST_RISK_RESPNS</span><span style="width:40px;height:5px;background:#e2dfd3;position:relative"><span style="position:absolute;left:0;top:0;bottom:0;width:5px;background:#1c1b18"></span></span><span style="width:22px;text-align:right;color:#6f6c63">4</span></div>
+          <div style="display:flex;align-items:center;padding:0 12px 0 36px;gap:8px"><span style="width:8px">■</span><span style="flex:1">CUST_VFCN_INFO</span><span style="width:40px;height:5px;background:#e2dfd3;position:relative"><span style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#1c1b18"></span></span><span style="width:22px;text-align:right;color:#6f6c63">1</span></div>
+          <div style="padding:0 12px 0 36px;color:#8d8a7f">⋯ 10 more</div>
+          <div style="display:flex;padding:0 12px 0 22px;gap:8px;color:#6f6c63"><span>▸ USER</span><span>8</span><span style="color:#8d8a7f;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0">USERS, USER_ROLE…</span><span style="color:#1c1b18">■ 1</span></div>
+          <div style="display:flex;padding:0 12px 0 22px;gap:8px;color:#6f6c63"><span>▸ VEH</span><span>14</span><span style="color:#8d8a7f;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0">VEH, VEH_ATTR, VEH_MAKE…</span></div>
+          <div style="display:flex;padding:0 12px;gap:8px;background:#eceae1;margin-top:4px"><span>▸ DCIS</span><span style="color:#6f6c63">96</span><span style="margin-left:auto;color:#1c1b18">■ 1</span></div>
+          <div style="display:flex;padding:0 12px;gap:8px;background:#eceae1;margin-top:4px"><span>▸ RDL</span><span style="color:#6f6c63">51</span></div>
+          <div style="display:flex;padding:0 12px;gap:8px;background:#eceae1;margin-top:4px"><span>▸ LOGGER</span><span style="color:#6f6c63">18</span></div>
+        </div>
+        <div style="border-top:1px solid #cfccc0;padding:8px 12px;font-size:10.5px;color:#6f6c63;display:flex;gap:10px;white-space:nowrap;font-family:'Fira Code',monospace"><span>click open</span><span>⇧click add</span><span style="margin-left:auto">drag to canvas</span></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- STATE B: typed "cust_id" → grouped results replace the tree -->
+<div id="state-results">
+<div class="dv-card" style="width:640px;height:600px;display:grid;grid-template-rows:40px 1fr;background:#f4f3ee;color:#1c1b18;font-size:12px">
+  <div style="display:flex;align-items:center;gap:14px;padding:0 14px;border-bottom:1px solid #cfccc0;background:#fbfaf6"><span style="font-weight:600;white-space:nowrap">Oracle SQL export</span><span style="font-family:'Fira Code',monospace;font-size:11px;color:#6f6c63;white-space:nowrap">clo · 575 tables</span><div style="display:flex;margin-left:auto;border:1px solid #cfccc0"><span style="padding:4px 12px;background:#1c1b18;color:#f4f3ee">Graph</span><span style="padding:4px 12px">Dictionary</span></div></div>
+  <div style="display:grid;grid-template-columns:44px 1fr;min-height:0">
+    <div style="border-right:1px solid #cfccc0;background:#fbfaf6;display:flex;flex-direction:column;align-items:center;padding-top:8px;gap:4px">
+      <div style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#1c1b18;color:#f4f3ee"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg></div>
+      <div style="width:24px;height:1px;background:#cfccc0;margin:6px 0"></div>
+      <div style="font-family:'Fira Code',monospace;font-size:8.5px;color:#6f6c63;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.06em">RECENT</div>
+      <div style="width:32px;height:22px;display:flex;align-items:center;justify-content:center;font-family:'Fira Code',monospace;font-size:9px;border:1px solid #1c1b18;background:#fff">APA</div>
+      <div style="width:32px;height:22px;display:flex;align-items:center;justify-content:center;font-family:'Fira Code',monospace;font-size:9px;border:1px solid #cfccc0;background:#fff">CUS</div>
+      <div style="width:32px;height:22px;display:flex;align-items:center;justify-content:center;font-family:'Fira Code',monospace;font-size:9px;border:1px solid #cfccc0;background:#fff">USR</div>
+    </div>
+    <div style="position:relative;overflow:hidden;background-color:#f4f3ee;background-image:linear-gradient(#e2dfd3 1px,transparent 1px),linear-gradient(90deg,#e2dfd3 1px,transparent 1px);background-size:24px 24px">
+      <div style="position:absolute;left:420px;top:90px;width:150px;background:#fff;border:1px solid #1c1b18;border-left:3px solid #1c1b18;font-family:'Fira Code',monospace;font-size:10.5px;opacity:.55"><div style="display:flex;justify-content:space-between;padding:5px 8px;border-bottom:1px solid #1c1b18;font-weight:500">CUST<span style="color:#8d8a7f;font-weight:400">18</span></div><div style="display:flex;padding:3px 8px;gap:6px;background:#edf5c7"><span style="color:#a16207;width:14px">PK</span><span>CUST_ID</span></div></div>
+      <div style="position:absolute;left:12px;top:12px;bottom:12px;width:350px;background:#fbfaf6;border:1px solid #1c1b18;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;gap:8px;padding:9px 12px;border-bottom:1px solid #1c1b18;font-family:'Fira Code',monospace;font-size:12.5px"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span>cust_id<span style="color:#9bbd1b">|</span></span><span style="margin-left:auto;font-size:13px;color:#6f6c63;line-height:1">×</span></div>
+        <div style="display:flex;align-items:center;gap:10px;padding:6px 12px;border-bottom:1px solid #cfccc0;font-size:10.5px;color:#6f6c63;font-family:'Fira Code',monospace"><span style="color:#1c1b18;border-bottom:1px solid #1c1b18">Columns 61</span><span>Tables 16</span><span style="margin-left:auto"><span style="color:#1c1b18">■</span> 3 on canvas</span></div>
+        <div style="font-family:'Fira Code',monospace;font-size:11px;line-height:1.95;padding:4px 0;overflow:hidden;flex:1">
+          <div style="display:flex;padding:0 12px;gap:8px;background:#eceae1"><span>PK in</span><span style="color:#6f6c63">9</span></div>
+          <div style="display:flex;align-items:center;padding:0 12px 0 22px;gap:8px;background:#1c1b18;color:#f4f3ee"><span style="width:8px">■</span><span style="flex:1">CUST.<b style="font-weight:500">CUST_ID</b></span><span style="width:40px;height:5px;background:#44443f;position:relative"><span style="position:absolute;left:0;top:0;bottom:0;width:38px;background:#c2e043"></span></span><span style="width:22px;text-align:right">61</span></div>
+          <div style="display:flex;align-items:center;padding:0 12px 0 22px;gap:8px"><span style="width:8px;color:#8d8a7f">□</span><span style="flex:1">CUST_ADR.<b style="font-weight:500">CUST_ID</b></span><span style="width:40px;height:5px;background:#e2dfd3;position:relative"><span style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#1c1b18"></span></span><span style="width:22px;text-align:right;color:#6f6c63">3</span></div>
+          <div style="display:flex;align-items:center;padding:0 12px 0 22px;gap:8px"><span style="width:8px">■</span><span style="flex:1">CUST_RISK_RESPNS.<b style="font-weight:500">CUST_ID</b></span><span style="width:40px;height:5px;background:#e2dfd3;position:relative"><span style="position:absolute;left:0;top:0;bottom:0;width:5px;background:#1c1b18"></span></span><span style="width:22px;text-align:right;color:#6f6c63">4</span></div>
+          <div style="display:flex;align-items:center;padding:0 12px 0 22px;gap:8px"><span style="width:8px">■</span><span style="flex:1">CUST_VFCN_INFO.<b style="font-weight:500">CUST_ID</b></span><span style="width:40px;height:5px;background:#e2dfd3;position:relative"><span style="position:absolute;left:0;top:0;bottom:0;width:2px;background:#1c1b18"></span></span><span style="width:22px;text-align:right;color:#6f6c63">1</span></div>
+          <div style="padding:0 12px 0 22px;color:#8d8a7f">⋯ 5 more</div>
+          <div style="display:flex;padding:0 12px;gap:8px;background:#eceae1;margin-top:4px"><span>FK in</span><span style="color:#6f6c63">49</span><span style="margin-left:auto;color:#6f6c63">all → CUST.CUST_ID</span></div>
+          <div style="display:flex;align-items:center;padding:0 12px 0 22px;gap:8px"><span style="width:8px;color:#8d8a7f">□</span><span style="flex:1">APP_ALRT.<b style="font-weight:500">CUST_ID</b></span><span style="width:40px;height:5px;background:#e2dfd3;position:relative"><span style="position:absolute;left:0;top:0;bottom:0;width:8px;background:#1c1b18"></span></span><span style="width:22px;text-align:right;color:#6f6c63">10</span></div>
+          <div style="display:flex;align-items:center;padding:0 12px 0 22px;gap:8px"><span style="width:8px;color:#8d8a7f">□</span><span style="flex:1">APP_CMNTS.<b style="font-weight:500">CUST_ID</b></span><span style="width:40px;height:5px;background:#e2dfd3;position:relative"><span style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#1c1b18"></span></span><span style="width:22px;text-align:right;color:#6f6c63">2</span></div>
+          <div style="display:flex;align-items:center;padding:0 12px 0 22px;gap:8px"><span style="width:8px;color:#8d8a7f">□</span><span style="flex:1">DLRSHP_CUST_LINK.<b style="font-weight:500">CUST_ID</b></span><span style="width:40px;height:5px;background:#e2dfd3;position:relative"><span style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#1c1b18"></span></span><span style="width:22px;text-align:right;color:#6f6c63">2</span></div>
+          <div style="padding:0 12px 0 22px;color:#8d8a7f">⋯ 46 more</div>
+          <div style="display:flex;padding:0 12px;gap:8px;background:#eceae1;margin-top:4px"><span>Plain column</span><span style="color:#6f6c63">3</span></div>
+          <div style="display:flex;align-items:center;padding:0 12px 0 22px;gap:8px"><span style="width:8px;color:#8d8a7f">□</span><span style="flex:1">AUDT_LOG.<b style="font-weight:500">CUST_ID</b></span><span style="color:#8d8a7f">no constraint</span></div>
+        </div>
+        <div style="border-top:1px solid #cfccc0;padding:8px 12px;display:flex;gap:8px;font-size:11px;align-items:center;white-space:nowrap"><span style="background:#1c1b18;color:#f4f3ee;padding:3px 9px">Add all 61</span><span style="border:1px solid #1c1b18;padding:3px 9px">PKs only</span><span style="margin-left:auto;color:#8d8a7f;font-family:'Fira Code',monospace;font-size:10px">↵ open · ⇧↵ add</span></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+</body>
+</html>
